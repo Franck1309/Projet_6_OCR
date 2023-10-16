@@ -6,17 +6,22 @@ fetch('http://localhost:5678/api/categories')
 fetch('http://localhost:5678/api/works')
     .then (dataWorks => dataWorks.json())
     .then (jsonListWorks => {
-       displayWorks(jsonListWorks) 
-       filtreObjets(jsonListWorks)
+       displayWorks(jsonListWorks)
     });
 
 /*********** Appel d'éléments ***************/
-
+const titlePortfolio = document.getElementById("portfolio")
 const filtresGallery = document.querySelector("#portfolio .filtres")
 const contenuGallery = document.querySelector(" #portfolio .gallery")
 const filtres = document.querySelector(".filtres")
 
 /************** Création Button Filtres ****************/
+
+const buttonModif = document.createElement("input")
+    buttonModif.type = "button"
+    buttonModif.value = "fff"
+titlePortfolio.appendChild(buttonModif)
+
 
 const buttonTous = document.createElement("input")
     buttonTous.type = "button"
@@ -90,16 +95,4 @@ function displayWorks(jsonListWorks){
     };
          
 }
-
-function filtreObjets (jsonListWorks){
-    
-    for (let i = 0 ; i < jsonListWorks.length ; i++){
-
-           
-
-        
-        
-    }  
-}
-
 

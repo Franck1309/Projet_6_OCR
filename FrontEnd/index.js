@@ -1,4 +1,14 @@
 /**************** Récupération du Back-End *********************/
+/*fetch("http://localhost:5678/api/users/login", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: {
+        "email": "string",
+        "password": "string"
+      }
+})*/
+
+    
 
 fetch('http://localhost:5678/api/categories')
     .then (dataCategories => dataCategories.json())
@@ -10,18 +20,22 @@ fetch('http://localhost:5678/api/works')
     });
 
 /*********** Appel d'éléments ***************/
-const titlePortfolio = document.getElementById("portfolio")
+const titlePortfolio = document.querySelector("#portfolio .title")
 const filtresGallery = document.querySelector("#portfolio .filtres")
 const contenuGallery = document.querySelector(" #portfolio .gallery")
 const filtres = document.querySelector(".filtres")
 
 /************** Création Button Filtres ****************/
 
+const iconModif = document.createElement("i")
+    iconModif.classList = ("fa-regular fa-pen-to-square")
+    iconModif.style.color = "#000000"
+titlePortfolio.appendChild(iconModif)
+
 const buttonModif = document.createElement("input")
     buttonModif.type = "button"
-    buttonModif.value = "fff"
+    buttonModif.value = "modifier"
 titlePortfolio.appendChild(buttonModif)
-
 
 const buttonTous = document.createElement("input")
     buttonTous.type = "button"
@@ -64,6 +78,11 @@ function displayWorks(jsonListWorks){
         contenuDiv.appendChild(contenuImage)
         contenuDiv.appendChild(contenuText)
 
+
+        buttonModif.addEventListener ("click", function() {
+            filtres.toggleAttribute("hidden")
+        })
+
         buttonObjets.addEventListener ("click", function(){
     
             if (workId !== 1){
@@ -95,4 +114,13 @@ function displayWorks(jsonListWorks){
     };
          
 }
+
+
+    const login = document.querySelector(".login")
+    const sectionLogin = document.querySelector(".formulaire-login")
+
+    login.addEventListener("click", function(){
+        console.log("ok")
+        sectionLogin.style.display("block")
+    })
 

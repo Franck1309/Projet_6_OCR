@@ -30,7 +30,9 @@ footer, header, hgroup, menu, nav, section {
 }
 body {
 	line-height: 1;
+	background-color: #FFFEF8;
 }
+
 ol, ul {
 	list-style: none;
 }
@@ -98,6 +100,60 @@ nav li {
 li:hover {
 	color: #B1663C;
 }
+
+/***************     Formulaire       ******************/
+#login {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	
+}
+
+#login form {
+	display: flex;
+	flex-direction: column;
+	width: 30%;
+	gap: 10px;
+	margin-top: 50px;
+}
+
+#login form .text {
+	display: flex;
+	align-items: start;
+}
+
+#login .btnConnecter {
+	border-radius: 60px;
+	padding: 15px;
+	padding-left: 10px;
+	padding-right: 10px;
+	border: none;
+	cursor: pointer;
+	background-color: #1D6154;
+	width: 50%;
+	margin: auto;
+	color: white;
+	margin-bottom: 0px;
+}
+
+#login .btnConnecter:active {
+	background-color: #299d88;
+}
+
+#login form .saisie {
+	border: none;
+	background-color: white;
+	box-shadow: 4px 5px 5px rgb(232, 224, 224) ;
+	height: 51px;
+	width: 350px;
+}
+
+#login a {
+	text-align: center;
+} 
+
+/*********************   Fin du Formulaire   ********************/
+
 #introduction {
 	display: flex;
 	align-items: center;
@@ -124,6 +180,24 @@ li:hover {
 #portfolio h2 {
 	text-align: center;
 	margin-bottom: 1em;
+}
+
+.title {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	
+}
+.title i {
+	margin-top: 9px;
+	padding-left: 15px ;
+}
+.title input {
+	border: none;
+	background-color: white;
+	height: 19px;
+	margin-top: 8px;
+	cursor: pointer;
 }
 
 .filtres {
@@ -207,7 +281,7 @@ input[type="submit"]{
 	text-align: center;
 	border-radius: 60px ;
 }
-
+/*******************   Footer   **********************/
 footer nav ul {
 	display: flex;
 	justify-content: flex-end;

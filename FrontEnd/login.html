@@ -10,7 +10,7 @@
 	<meta name="description" content="">
 	<link rel="stylesheet" href="./assets/style.css">
 	<script src="https://kit.fontawesome.com/89eff04f91.js" crossorigin="anonymous"></script>
-	<script type="module" src="index.js" defer></script>
+	
 </head>
 <body>
 <header>
@@ -29,11 +29,13 @@
 		<h2>Log in</h2>
 		<form class="formulaire-login">
 			email : <br>
-			<input class="saisie" type="text" name="email"> <br>
+			<input class="saisie" type="email" name="email"> <br>
 			password : <br>
-			<input  class="saisie" type="text" name="password"> <br>
-			<input class="btnConnecter"  type="button" value="Se connecter"><br>
+			<input  class="saisie" type="password" name="password"> <br>
+			<input class="btnConnecter"  type="submit" value="Se connecter"><br>
+			<p id="erreur"></p>
 			<a href="#">Mot de passe oublié</a>
+
 		</form>
 	</section>
 </main>
@@ -45,6 +47,6 @@
 		</ul>
 	</nav>
 </footer>
-
+<script type="module" src="login.js"></script>
 </body>
 </html>

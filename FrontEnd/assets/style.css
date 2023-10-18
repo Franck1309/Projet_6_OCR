@@ -36,6 +36,17 @@ body {
 ol, ul {
 	list-style: none;
 }
+
+ul li a {
+	 text-decoration: none;
+	 color: black;
+	 
+}
+ul li a:hover {
+	font-size: larger; 
+
+}
+
 blockquote, q {
 	quotes: none;
 }
@@ -106,7 +117,8 @@ li:hover {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	
+	margin-top: 150px;
+	margin-bottom: 180px;
 }
 
 #login form {
@@ -121,7 +133,12 @@ li:hover {
 	display: flex;
 	align-items: start;
 }
-
+#login form p {
+	color: red;
+}
+#login .redirection {
+	background-color: blue;
+}
 #login .btnConnecter {
 	border-radius: 60px;
 	padding: 15px;

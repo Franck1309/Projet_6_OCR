@@ -43,11 +43,6 @@ function displayWorks(jsonListWorks){
         contenuGallery.appendChild(contenuDiv)
         contenuDiv.appendChild(contenuImage)
         contenuDiv.appendChild(contenuText)
-
-        buttonModif.addEventListener ("click", function() {
-           
-        })
-
     };
          
 }

@@ -14,7 +14,6 @@ const titlePortfolio = document.querySelector("#portfolio .title")
 const filtresGallery = document.querySelector("#portfolio .filtres")
 const contenuGallery = document.querySelector(" #portfolio .gallery")
 const filtres = document.querySelector(".filtres")
-
 /************** Création Button Filtres ****************/
 
 const buttonTous = document.createElement("input")
@@ -90,6 +89,3 @@ function displayWorks(jsonListWorks){
     };
          
 }
-
-    
-

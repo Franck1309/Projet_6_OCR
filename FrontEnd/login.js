@@ -1,37 +1,32 @@
-
-const url = ('http://localhost:5678/api/users/login');
-const data = {
-        "email": "sophie.bluel@test.tld" ,
-        "password": "S0phie"
-};
-fetch(url, {
-        method :"POST", 
-        headers : {"content-type" : "application/json"},
-        body :JSON.stringify(data)
-})
-.then(resp => resp.json())
-.then(result => {
-    console.log(data)
-    console.log(result)
-})
-
-const filtresGallery = document.querySelector("#portfolio .filtres")
-const contenuGallery = document.querySelector(" #portfolio .gallery")
 const formulaireLogin = document.querySelector(".formulaire-login")
-
 formulaireLogin.addEventListener("submit", function(event){
-    
+
+    event.preventDefault()
     let erreur ;
     const inputs = this;
+    const formData = new FormData(formulaireLogin)
+    const data = Object.fromEntries(formData)
 
-    if (inputs["email"].value != data.email){
-        erreur = "Adresse email incorecte"
+   
+    fetch('http://localhost:5678/api/users/login', {
+        method :"POST", 
+        headers : {"content-type" : "application/json"},
+        body : JSON.stringify(data)
+    })
+    .then(resp => resp.json())
+    .then(result => {
+        console.log(result)
+        console.log(data)
+
+    if (result.message === ("user not found")){
+        event.preventDefault()
+        erreur = "Adresse email incorrect"
     }
-
-    if (inputs["password"].value != data.password){
+    if (result.error){
+        event.preventDefault()
         erreur = "Mot de passe incorrect"
     }
-
+    
     for (let i = 0 ; i < inputs.length ; i++){
         if (!inputs[i].value) {
             erreur = "Veuillez remplir tous les champs vide"
@@ -40,9 +35,10 @@ formulaireLogin.addEventListener("submit", function(event){
 
     if (erreur) {
         event.preventDefault()
-        document.getElementById("erreur").innerHTML = erreur;
+        document.getElementById("erreur").innerHTML = erreur
     } else {
         event.preventDefault()
         location.href = "indexlogin.html"
-    }
+    };
+    })
 });

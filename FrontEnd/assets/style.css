@@ -44,7 +44,7 @@ ul li a {
 }
 ul li a:hover {
 	font-size: larger; 
-
+	margin-left: -10px;
 }
 
 blockquote, q {
@@ -101,7 +101,6 @@ nav ul {
 	display: flex;
 	align-items: center;
 	list-style-type: none;
-
 }
 nav li {
 	padding: 0 10px;
@@ -112,7 +111,13 @@ li:hover {
 	color: #B1663C;
 }
 
-/***************     Formulaire       ******************/
+/***************     Boutton Modifier      ******************/
+
+.filtres {
+	display: block;
+}
+
+/***************     Formulaire Login   ******************/
 #login {
 	display: flex;
 	flex-direction: column;
@@ -133,9 +138,7 @@ li:hover {
 	display: flex;
 	align-items: start;
 }
-#login form p {
-	color: red;
-}
+
 #login .redirection {
 	background-color: blue;
 }
@@ -152,7 +155,12 @@ li:hover {
 	color: white;
 	margin-bottom: 0px;
 }
-
+#erreur {
+	margin: auto;
+	color: red;
+	margin-bottom: 10px;
+	margin-top: 10px;
+}
 #login .btnConnecter:active {
 	background-color: #299d88;
 }
@@ -169,8 +177,161 @@ li:hover {
 	text-align: center;
 } 
 
-/*********************   Fin du Formulaire   ********************/
+/*********************   Fin du Formulaire Login   ********************/
 
+/*********************   Modale 1 ********************/
+#modale {
+	display: block;
+	visibility: hidden;
+	position: absolute;
+	flex-direction: column;
+	left: 25%;
+	top: 60%;
+	width: 50%;
+	background-color: white;
+	border: #1D6154 1px solid;
+	border-radius: 10px;
+	padding-bottom: 30px;
+}
+
+#portfolio .contenuModale {
+	display: grid;
+	margin: auto;
+	padding-top: 30px;
+	padding-bottom: 50px;
+	gap: 10px 10px;
+	width: 70%;
+	grid-template-columns: 15% 15% 15% 15% 15%;
+	justify-content: space-between;
+	border-bottom: #1D6154 1px solid ;
+}
+
+.contenuModale img {
+	display: flex;
+	position: relative;
+	width: 100%;
+}
+
+#modale .buttonAddPictures , #modale .buttonAdd{
+	display: flex;
+	margin: auto;
+	margin-top: 30px;
+	border: #1D6154 1px solid;
+	border-radius: 60px;
+	padding: 5px;
+	padding-left: 10px;
+	padding-right: 10px;
+	background-color: #1D6154;
+	color: white;
+	font-family: syne;
+	cursor: pointer;
+}
+
+.backPoubelle {
+	display: block;
+	position: relative;
+	bottom: 76%;
+	left: 65%;
+	width: 17px;
+	height: 17px;
+	background-color: black;
+	border-radius: 10%;
+}
+
+#modale .backPoubelle i {
+	color: white;
+	padding: 4px;
+	margin-top: 3px;
+}
+
+.divIconX {
+	display: flex;
+	flex-direction: row;
+	justify-content: end;
+	padding: 20px;
+}
+
+#modale h2 {
+	color: black;
+	font-family: work sans;
+	font-weight: 300;
+}
+
+/*********************  Fin Modale 1  ********************/
+
+/*********************   Modale 2 ********************/
+.divIcon {
+ display: flex;
+ flex-direction: row;
+ justify-content: space-between;
+ padding: 20px;
+}
+
+.placePictures {
+	display: flex;
+	flex-direction: column;
+	background-color: #E8F1F6;
+	height: 169px;
+}
+form .placePictures img {
+	display: block;
+	width: 50%; 
+	margin: auto;
+	object-fit: cover;
+	height: 169px;
+}
+
+.placePictures i {
+	margin: auto;
+	padding-top: 10px;
+	font-size: xxx-large;
+}
+
+#modale .buttonAddPictures {
+background-color: #CBD6DC;
+border: none;
+color: #306685;
+margin-top: 10px;
+}
+
+#modale .placePictures p {
+	color: #306685;
+	margin: auto;
+	margin-top: 5px;
+	padding-bottom: 10px;
+}
+
+#modale form {
+	display: flex;
+	flex-direction: column;
+	width: 70%;
+	padding-top: 20px;
+	gap:5px;
+	margin: auto;
+	height: auto;
+}
+
+#modale form .border {
+	padding-top: 30px;
+	border-bottom: #1D6154 solid 1px;
+}
+
+form input {
+	margin-bottom: 10px;
+	justify-content: center;
+}
+
+::-webkit-file-upload-button{
+	display: none;
+}
+#modale form .buttonAdd {
+	width: 40%;
+	color: #306685;
+	background-color: #CBD6DC;
+	border: none;
+}
+
+/*********************  Fin Modale  ********************/
 #introduction {
 	display: flex;
 	align-items: center;

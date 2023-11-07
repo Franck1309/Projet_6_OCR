@@ -4,15 +4,13 @@ let jsonListCat = fetch('http://localhost:5678/api/categories')
     .then (dataCategories => dataCategories.json())
     .then (jsonListCategories => {
         jsonListCat = jsonListCategories
-        console.log(jsonListCategories)
     });
 
 fetch('http://localhost:5678/api/works')
     .then (dataWorks => dataWorks.json())
     .then (jsonListWorks => {
-       displayWorks(jsonListWorks)
-       createModale(jsonListWorks)
-       console.log(jsonListWorks)
+        displayWorks(jsonListWorks)
+        createModale(jsonListWorks)
     });
 
 /*********** Appel d'éléments ***************/
@@ -63,14 +61,13 @@ const buttonModif = document.createElement("input")
 titlePortfolio.appendChild(buttonModif)
 
 /************** fonctions ****************/
-
 function displayWorks(jsonListWorks){
     for (let i = 0 ; i < jsonListWorks.length ; i++) {
 
         const contenuDiv = document.createElement("figure")
         const contenuImage = document.createElement("img")
         const contenuText = document.createElement("figcaption")
-        const workId = jsonListWorks[i].categoryId 
+        const workId = jsonListWorks[i].categoryId
 
         contenuImage.src = jsonListWorks[i].imageUrl
         contenuText.innerText = jsonListWorks[i].title
@@ -113,73 +110,81 @@ function displayWorks(jsonListWorks){
 }
 
 function createModale(jsonListWorks){
-
     buttonModif.addEventListener("click", function(){
-        const modale = document.getElementById("modale")
-        modale.style.visibility = "visible"
+            const modale = document.getElementById("modale")
+            modale.style.visibility = "visible"
 
-        const divIconX = document.createElement("div")
-        divIconX.classList = ("divIconX")
-        modale.appendChild(divIconX)
+            const divIconX = document.createElement("div")
+            divIconX.classList = ("divIconX")
+            modale.appendChild(divIconX)
 
-        const iconCross = document.createElement("i")
-        iconCross.classList = ("fa-solid fa-xmark fa-lg")
-        iconCross.style.color = "#0a0c0f"
-        divIconX.appendChild(iconCross)
-    
-        const titleModale = document.createElement("h2")
-        titleModale.innerHTML = ("Galerie photo")
-        modale.appendChild(titleModale)
+            const iconCross = document.createElement("i")
+            iconCross.classList = ("fa-solid fa-xmark fa-lg")
+            iconCross.style.color = "#0a0c0f"
+            divIconX.appendChild(iconCross)
         
-        const contenuModale = document.createElement("div")
-        contenuModale.classList = ("contenuModale")
-        modale.appendChild(contenuModale)
-        
-        const contenuButton = document.createElement("input")
-            contenuButton.type = "button"
-            contenuButton.value = "Ajouter une photo"
-            contenuButton.classList = ("buttonFiltres buttonAdd")
-        modale.appendChild(contenuButton)
+            const titleModale = document.createElement("h2")
+            titleModale.innerHTML = ("Galerie photo")
+            modale.appendChild(titleModale)
+            
+            const contenuModale = document.createElement("div")
+            contenuModale.classList = ("contenuModale")
+            modale.appendChild(contenuModale)
+            
+            const contenuButton = document.createElement("input")
+                contenuButton.type = "button"
+                contenuButton.value = "Ajouter une photo"
+                contenuButton.classList = ("buttonFiltres buttonAdd")
+            modale.appendChild(contenuButton)
+            
+            for (let i = 0 ; i < jsonListWorks.length ; i++) {
+                
+                const contenuDivM = document.createElement("figure")
+                const contenuImage = document.createElement("img")
+                contenuImage.src = jsonListWorks[i].imageUrl
 
-        for (let i = 0 ; i < jsonListWorks.length ; i++) {
+                const deleteImage = document.createElement("div")
+                deleteImage.classList = ("backPoubelle")
 
-            const contenuDivM = document.createElement("figure")
-            const contenuImage = document.createElement("img")
-            contenuImage.src = jsonListWorks[i].imageUrl
+                const poubelleImage = document.createElement("i")
+                poubelleImage.classList = ("fa-solid fa-trash-can fa-xs poubelle")
 
-            const deleteImage = document.createElement("div")
-            deleteImage.classList = ("backPoubelle")
+                contenuDivM.appendChild(contenuImage)
+                contenuDivM.appendChild(deleteImage)
+                contenuModale.appendChild(contenuDivM)
+                deleteImage.appendChild(poubelleImage)
 
-            const poubelleImage = document.createElement("i")
-            poubelleImage.classList = ("fa-solid fa-trash-can fa-xs poubelle")
-
-            contenuDivM.appendChild(contenuImage)
-            contenuDivM.appendChild(deleteImage)
-            contenuModale.appendChild(contenuDivM)
-            deleteImage.appendChild(poubelleImage)
-
-            if (modale.style.visibility = "visible") {
-                buttonModif.disabled = true
-            }
-
-            poubelleImage.addEventListener("click", function(){     
-                    let figure = jsonListWorks[i].id
-                    console.log(figure)
-                    fetch(`http://localhost:5678/api/works/${figure}`, {
+                poubelleImage.addEventListener("click", function(){               
+                    let idFigure = jsonListWorks[i].id                 
+                    fetch(`http://localhost:5678/api/works/${idFigure}`, {
                         method: 'DELETE',
                         headers: {
                             "Content-Type": "application/json;charset=utf-8",
-                            Authorization :`Bearer ${token}`, 
+                            Authorization :`Bearer ${token}`
                         }
-                    })   
+                    })
+                    .then( response => {
+                        const deletedIndex = jsonListWorks.findIndex(work => work.id === idFigure);
+                        if (deletedIndex !== -1) {
+                            jsonListWorks.splice(deletedIndex, 1);
+                         }
+                        contenuGallery.innerHTML = "" 
+                        contenuDivM.innerHTML = "" 
+                        displayWorks(jsonListWorks)
+                    })
+                    console.log(jsonListWorks)
+                })
+            };
+            
+            if (modale.style.visibility = "visible") {
+                buttonModif.disabled = true
+            }
+            iconCross.addEventListener("click", function(){
+                modale.style.visibility = "hidden"
+                buttonModif.disabled = false
+                modale.innerHTML= ""
             })
-        };
-        iconCross.addEventListener("click", function(){
-            modale.style.visibility = "hidden"
-            buttonModif.disabled = false
-            modale.innerHTML= ""
-        })
-        createModale2()
+            createModale2()
     })
 }
 
@@ -217,12 +222,24 @@ function createModale2(){
         picturesLogo.classList = ("fa-regular fa-image")
         picturesLogo.style.color = ("#b9c5cc")
         placePictures.appendChild(picturesLogo)
+
+        const labelButton = document.createElement("button")
+        labelButton.addEventListener("click", () => {
+            document.getElementById("files").click();
+        })
+
+        labelButton.type = "button"
+        labelButton.classList = ("buttonAdd")
+        labelButton.innerText = ("+ Ajouter photo")
         
         const buttonAddPictures = document.createElement("input")
         buttonAddPictures.type = "file"
+        buttonAddPictures.style.display = "none"
         buttonAddPictures.name = "myFile"
-        buttonAddPictures.classList = ("buttonAdd")
+        buttonAddPictures.id = "files"
+        placePictures.appendChild(labelButton)
         placePictures.appendChild(buttonAddPictures)
+        
 
         // Appel de la photo 
         buttonAddPictures.addEventListener("change", function(){
@@ -271,10 +288,6 @@ function createModale2(){
         categorieInputForm.name = "category"
         formAddPictures.appendChild(categorieInputForm)
 
-        const newCat = document.createElement("option")
-        newCat.innerText = "Bar & Restaurants"
-        categorieInputForm.appendChild(newCat)
-
         for ( let i = 0 ; i < jsonListCat.length ; i++) {
             const newCat = document.createElement("option")
             newCat.innerText = jsonListCat[i].name
@@ -297,38 +310,47 @@ function createModale2(){
         champError.id = ("erreur")
         formAddPictures.appendChild(champError)
 
+        const champSucces = document.createElement("p")
+        champSucces.id = ("succes")
+        formAddPictures.appendChild(champSucces)
+
         formAddPictures.addEventListener("submit", function(event){
-            
             event.preventDefault()
             let erreur 
             const inputs = this
             const myFormData = new FormData()
-                myFormData.set("image", buttonAddPictures.files[0])
-                myFormData.set("title", titreInputForm.value)
-                myFormData.set("category", +categorieInputForm.value)
-                
-            fetch("http://localhost:5678/api/works", {
-            method : "POST",
-            headers : {
-                "Accept" : "application/json",
-                Authorization :`Bearer ${token}`
-            },
-            body : myFormData
-            }).then(resp=> resp.json())
-            .then(result => {     
-                if (!inputs[0].value){
-                    event.preventDefault()
+                myFormData.append("image", buttonAddPictures.files[0])
+                myFormData.append("title", titreInputForm.value)
+                myFormData.append("category", +categorieInputForm.value)
+
+                if (myFormData.get("image") == "undefined"){
                     erreur = "Veuillez ajouter une image"
                 }
-                if (!inputs[1].value){
+                if (myFormData.get("title") === ""){
                     erreur = "Veuillez ajouter un titre"
-                }
+                } 
                 if (erreur) {
                     event.preventDefault()
                     document.getElementById("erreur").innerHTML = erreur
+                } else {
+                    document.getElementById("erreur").style.color = "green"
+                    document.getElementById("erreur").innerHTML = "Formulaire envoyé"
+                    fetch("http://localhost:5678/api/works", {
+                        method : "POST",
+                        headers : {
+                            "Accept" : "application/json",
+                            Authorization :`Bearer ${token}`
+                        },
+                        body : myFormData    
+                    }).then(resp=> resp.json()).then(result => {   
+                        contenuGallery.innerHTML = ""
+                        fetch('http://localhost:5678/api/works')
+                        .then (dataWorks => dataWorks.json())
+                        .then (jsonListWorks => { 
+                            displayWorks(jsonListWorks)        
+                        });
+                    }) 
                 }
-            })
-            console.log([...myFormData]) 
         })
         iconCross.addEventListener("click", function(){
         modale.style.visibility = "hidden"
@@ -337,6 +359,25 @@ function createModale2(){
         })
     })  
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 /************** fonctions localStroage ****************/
@@ -349,5 +390,10 @@ function displayLogin(){
 } else {
     titlePortfolio.style.display = "none"
 }
+btnLogin.addEventListener("click", ()=>{
+    if (token != "undefined"){
+        window.localStorage.setItem("token", "undefined");
+    }
+})
 }
 displayLogin()

@@ -321,11 +321,9 @@ form input {
 	justify-content: center;
 }
 
-::-webkit-file-upload-button{
-	display: none;
-}
 #modale form .buttonAdd {
-	width: 40%;
+	width: 60%;
+	justify-content: center;
 	color: #306685;
 	background-color: #CBD6DC;
 	border: none;

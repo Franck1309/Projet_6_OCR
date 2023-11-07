@@ -44,6 +44,11 @@ function displayLogin(){
     if (token != "undefined") {
         btnLogin.innerText = "logout"
     } 
+    btnLogin.addEventListener("click", ()=>{
+        if (token != "undefined"){
+            window.localStorage.setItem("token", "undefined");
+        }
+    })
 }
 displayLogin()
 

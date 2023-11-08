@@ -1,8 +1,13 @@
+/*********** Appel d'éléments HTML ***************/
+
 const formulaireLogin = document.querySelector(".formulaire-login")
 const titlePortfolio = document.querySelector("#portfolio .btnModif")
 const filtres = document.querySelector(".filtres")
 const btnLogin = document.querySelector(".login")
 let token = window.localStorage.getItem("token");
+
+
+/*********** Formulaire de connexion ***************/
 
 formulaireLogin.addEventListener("submit", function(event){
 
@@ -39,6 +44,9 @@ formulaireLogin.addEventListener("submit", function(event){
         };
     })
 });
+
+
+/***************** fonction localStorage ******************/
 
 function displayLogin(){
     if (token != "undefined") {

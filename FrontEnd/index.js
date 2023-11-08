@@ -10,19 +10,18 @@ fetch('http://localhost:5678/api/works')
     .then (dataWorks => dataWorks.json())
     .then (jsonListWorks => {
         displayWorks(jsonListWorks)
-        createModale(jsonListWorks)
+        console.log(jsonListWorks)
     });
 
-/*********** Appel d'éléments ***************/
+/*********** Appel d'éléments HTML ***************/
 
 const titlePortfolio = document.querySelector("#portfolio .btnModif")
-const filtresGallery = document.querySelector("#portfolio .filtres")
 const contenuGallery = document.querySelector(" #portfolio .gallery")
 const filtres = document.querySelector(".filtres")
 const btnLogin = document.querySelector(".login")
 let token = window.localStorage.getItem("token");
 
-/************** Création Button Filtres ****************/
+/************** Création des Boutons Filtres ****************/
 
 const buttonTous = document.createElement("input")
     buttonTous.type = "button"
@@ -48,7 +47,7 @@ const buttonHotels = document.createElement("input")
     buttonHotels.classList.add("buttonFiltres")
 filtres.appendChild(buttonHotels)
 
-/************** Création Button modifier ****************/
+/************** Création du bouton modifier ****************/
 
 const iconModif = document.createElement("i")
     iconModif.classList = ("fa-regular fa-pen-to-square")
@@ -60,7 +59,7 @@ const buttonModif = document.createElement("input")
     buttonModif.value = "modifier"
 titlePortfolio.appendChild(buttonModif)
 
-/************** fonctions ****************/
+/********************** fonctions *************************/
 function displayWorks(jsonListWorks){
     for (let i = 0 ; i < jsonListWorks.length ; i++) {
 
@@ -109,278 +108,355 @@ function displayWorks(jsonListWorks){
          
 }
 
-function createModale(jsonListWorks){
-    buttonModif.addEventListener("click", function(){
-            const modale = document.getElementById("modale")
-            modale.style.visibility = "visible"
+buttonModif.addEventListener("click", function(){
+    fetch('http://localhost:5678/api/works')
+    .then (dataWorks => dataWorks.json())
+    .then (jsonListWorks => {
+        const modale = document.getElementById("modale")
+        modale.style.visibility = "visible"
 
-            const divIconX = document.createElement("div")
-            divIconX.classList = ("divIconX")
-            modale.appendChild(divIconX)
-
-            const iconCross = document.createElement("i")
-            iconCross.classList = ("fa-solid fa-xmark fa-lg")
-            iconCross.style.color = "#0a0c0f"
-            divIconX.appendChild(iconCross)
-        
-            const titleModale = document.createElement("h2")
-            titleModale.innerHTML = ("Galerie photo")
-            modale.appendChild(titleModale)
-            
-            const contenuModale = document.createElement("div")
-            contenuModale.classList = ("contenuModale")
-            modale.appendChild(contenuModale)
-            
-            const contenuButton = document.createElement("input")
-                contenuButton.type = "button"
-                contenuButton.value = "Ajouter une photo"
-                contenuButton.classList = ("buttonFiltres buttonAdd")
-            modale.appendChild(contenuButton)
-            
-            for (let i = 0 ; i < jsonListWorks.length ; i++) {
-                
-                const contenuDivM = document.createElement("figure")
-                const contenuImage = document.createElement("img")
-                contenuImage.src = jsonListWorks[i].imageUrl
-
-                const deleteImage = document.createElement("div")
-                deleteImage.classList = ("backPoubelle")
-
-                const poubelleImage = document.createElement("i")
-                poubelleImage.classList = ("fa-solid fa-trash-can fa-xs poubelle")
-
-                contenuDivM.appendChild(contenuImage)
-                contenuDivM.appendChild(deleteImage)
-                contenuModale.appendChild(contenuDivM)
-                deleteImage.appendChild(poubelleImage)
-
-                poubelleImage.addEventListener("click", function(){               
-                    let idFigure = jsonListWorks[i].id                 
-                    fetch(`http://localhost:5678/api/works/${idFigure}`, {
-                        method: 'DELETE',
-                        headers: {
-                            "Content-Type": "application/json;charset=utf-8",
-                            Authorization :`Bearer ${token}`
-                        }
-                    })
-                    .then( response => {
-                        const deletedIndex = jsonListWorks.findIndex(work => work.id === idFigure);
-                        if (deletedIndex !== -1) {
-                            jsonListWorks.splice(deletedIndex, 1);
-                         }
-                        contenuGallery.innerHTML = "" 
-                        contenuDivM.innerHTML = "" 
-                        displayWorks(jsonListWorks)
-                    })
-                    console.log(jsonListWorks)
-                })
-            };
-            
-            if (modale.style.visibility = "visible") {
-                buttonModif.disabled = true
-            }
-            iconCross.addEventListener("click", function(){
-                modale.style.visibility = "hidden"
-                buttonModif.disabled = false
-                modale.innerHTML= ""
-            })
-            createModale2()
-    })
-}
-
-function createModale2(){
-    
-    const buttonAdd = document.querySelector(".buttonAdd")
-
-    buttonAdd.addEventListener("click", function(){
-            
-        modale.innerHTML = ""
-
-        const divIcon = document.createElement("div")
-        divIcon.classList = ("divIcon")
-        modale.appendChild(divIcon)
-
-        const arrow = document.createElement("i")
-        arrow.classList =("fa-solid fa-arrow-left arrow-left")
-        divIcon.appendChild(arrow)
+        const divIconX = document.createElement("div")
+        divIconX.classList = ("divIconX")
+        modale.appendChild(divIconX)
 
         const iconCross = document.createElement("i")
         iconCross.classList = ("fa-solid fa-xmark fa-lg")
         iconCross.style.color = "#0a0c0f"
-        divIcon.appendChild(iconCross)
-
+        divIconX.appendChild(iconCross)
+        
         const titleModale = document.createElement("h2")
-        titleModale.innerHTML = ("Ajout photo")
+        titleModale.innerHTML = ("Galerie photo")
         modale.appendChild(titleModale)
+            
+        const contenuModale = document.createElement("div")
+        contenuModale.classList = ("contenuModale")
+        modale.appendChild(contenuModale)
+            
+        const contenuButton = document.createElement("input")
+        contenuButton.type = "button"
+        contenuButton.value = "Ajouter une photo"
+        contenuButton.classList = ("buttonFiltres buttonAdd")
+        modale.appendChild(contenuButton)
+            
+        for (let i = 0 ; i < jsonListWorks.length ; i++) {   
+            const contenuDivM = document.createElement("figure")
+            const contenuImage = document.createElement("img")
+            contenuImage.src = jsonListWorks[i].imageUrl
+
+            const deleteImage = document.createElement("div")
+            deleteImage.classList = ("backPoubelle")
+
+            const poubelleImage = document.createElement("i")
+            poubelleImage.classList = ("fa-solid fa-trash-can fa-xs poubelle")
+
+            contenuDivM.appendChild(contenuImage)
+            contenuDivM.appendChild(deleteImage)
+            contenuModale.appendChild(contenuDivM)
+            deleteImage.appendChild(poubelleImage)
+
+            poubelleImage.addEventListener("click", function(){               
+                let idFigure = jsonListWorks[i].id                 
+                fetch(`http://localhost:5678/api/works/${idFigure}`, {
+                    method: 'DELETE',
+                    headers: {
+                        "Content-Type": "application/json;charset=utf-8",
+                        Authorization :`Bearer ${token}`
+                    }
+                    })
+                .then( response => {
+                    const deletedIndex = jsonListWorks.findIndex(work => work.id === idFigure);
+                    if (deletedIndex !== -1) {
+                        jsonListWorks.splice(deletedIndex, 1);
+                    }
+                    contenuGallery.innerHTML = "" 
+                    contenuDivM.innerHTML = "" 
+                    displayWorks(jsonListWorks)
+                })
+            console.log(jsonListWorks)
+            })
+        };
+            
+        if (modale.style.visibility = "visible") {
+            buttonModif.disabled = true
+        }
+        iconCross.addEventListener("click", function(){
+            modale.style.visibility = "hidden"
+            buttonModif.disabled = false
+            modale.innerHTML= ""
+        })
+        contenuButton.addEventListener("click", function (){
+            createModale2()
+        })
+    });       
+})
+
+function createModale2(jsonListWorks){
+            
+    modale.style.visibility = "hidden"
+    const modale2 = document.getElementById("modale2")
+    modale2.classList = ("modale")
+    modale2.style.visibility = "visible"
+    
+    const divIcon = document.createElement("div")
+    divIcon.classList = ("divIcon")
+    modale2.appendChild(divIcon)
+
+    const arrow = document.createElement("i")
+    arrow.classList =("fa-solid fa-arrow-left arrow-left")
+    divIcon.appendChild(arrow)
+
+    arrow.addEventListener("click", function(){
+        fetch('http://localhost:5678/api/works')
+        .then (dataWorks => dataWorks.json())
+        .then (jsonListWorks => {
+
+        const modale = document.getElementById("modale")
+        modale.innerHTML = ""
+        modale.style.visibility = "visible"
+
+        const divIconX = document.createElement("div")
+        divIconX.classList = ("divIconX")
+        modale.appendChild(divIconX)
+
+        const iconCross = document.createElement("i")
+        iconCross.classList = ("fa-solid fa-xmark fa-lg")
+        iconCross.style.color = "#0a0c0f"
+        divIconX.appendChild(iconCross)
+        
+        const titleModale = document.createElement("h2")
+        titleModale.innerHTML = ("Galerie photo")
+        modale.appendChild(titleModale)
+            
+        const contenuModale = document.createElement("div")
+        contenuModale.classList = ("contenuModale")
+        modale.appendChild(contenuModale)
+            
+        const contenuButton = document.createElement("input")
+        contenuButton.type = "button"
+        contenuButton.value = "Ajouter une photo"
+        contenuButton.classList = ("buttonFiltres buttonAdd")
+        modale.appendChild(contenuButton)
+            
+        for (let i = 0 ; i < jsonListWorks.length ; i++) {   
+            const contenuDivM = document.createElement("figure")
+            const contenuImage = document.createElement("img")
+            contenuImage.src = jsonListWorks[i].imageUrl
+
+            const deleteImage = document.createElement("div")
+            deleteImage.classList = ("backPoubelle")
+
+            const poubelleImage = document.createElement("i")
+            poubelleImage.classList = ("fa-solid fa-trash-can fa-xs poubelle")
+
+            contenuDivM.appendChild(contenuImage)
+            contenuDivM.appendChild(deleteImage)
+            contenuModale.appendChild(contenuDivM)
+            deleteImage.appendChild(poubelleImage)
+
+            poubelleImage.addEventListener("click", function(){               
+                let idFigure = jsonListWorks[i].id                 
+                fetch(`http://localhost:5678/api/works/${idFigure}`, {
+                    method: 'DELETE',
+                    headers: {
+                        "Content-Type": "application/json;charset=utf-8",
+                        Authorization :`Bearer ${token}`
+                    }
+                    })
+                .then( response => {
+                    const deletedIndex = jsonListWorks.findIndex(work => work.id === idFigure);
+                    if (deletedIndex !== -1) {
+                        jsonListWorks.splice(deletedIndex, 1);
+                    }
+                    contenuGallery.innerHTML = "" 
+                    contenuDivM.innerHTML = "" 
+                    displayWorks(jsonListWorks)
+                })
+            console.log(jsonListWorks)
+            })
+        };
+            
+        if (modale.style.visibility = "visible") {
+            buttonModif.disabled = true
+        }
+        iconCross.addEventListener("click", function(){
+            modale.style.visibility = "hidden"
+            buttonModif.disabled = false
+            modale.innerHTML= ""
+        })
+        contenuButton.addEventListener("click", function (){
+            createModale2()
+        })
+        modale2.style.visibility = "hidden"
+        modale.style.visibility = "visible"
+        if (modale2.style.visibility = "hidden"){
+            modale2.innerHTML = ""
+        }
+    });
+        
+    console.log(jsonListWorks)
+    })
+
+    const iconCross = document.createElement("i")
+    iconCross.classList = ("fa-solid fa-xmark fa-lg")
+    iconCross.style.color = "#0a0c0f"
+    divIcon.appendChild(iconCross)
+
+    const titleModale = document.createElement("h2")
+    titleModale.innerHTML = ("Ajout photo")
+    modale2.appendChild(titleModale)
         
      /********************   Création du contenu pour l'image   ************************/
 
-        const placePictures = document.createElement("div")
-        placePictures.classList =("placePictures")
+    const placePictures = document.createElement("div")
+    placePictures.classList =("placePictures")
         
-        const picturesLogo = document.createElement("i")
-        picturesLogo.classList = ("fa-regular fa-image")
-        picturesLogo.style.color = ("#b9c5cc")
-        placePictures.appendChild(picturesLogo)
+    const picturesLogo = document.createElement("i")
+    picturesLogo.classList = ("fa-regular fa-image")
+    picturesLogo.style.color = ("#b9c5cc")
+    placePictures.appendChild(picturesLogo)
 
-        const labelButton = document.createElement("button")
-        labelButton.addEventListener("click", () => {
-            document.getElementById("files").click();
-        })
+    const labelButton = document.createElement("button")
+    labelButton.addEventListener("click", () => {
+        document.getElementById("files").click();
+    })
 
-        labelButton.type = "button"
-        labelButton.classList = ("buttonAdd")
-        labelButton.innerText = ("+ Ajouter photo")
+    labelButton.type = "button"
+    labelButton.classList = ("buttonAdd")
+    labelButton.innerText = ("+ Ajouter photo")
         
-        const buttonAddPictures = document.createElement("input")
-        buttonAddPictures.type = "file"
-        buttonAddPictures.style.display = "none"
-        buttonAddPictures.name = "myFile"
-        buttonAddPictures.id = "files"
-        placePictures.appendChild(labelButton)
-        placePictures.appendChild(buttonAddPictures)
-        
+    const buttonAddPictures = document.createElement("input")
+    buttonAddPictures.type = "file"
+    buttonAddPictures.style.display = "none"
+    buttonAddPictures.name = "myFile"
+    buttonAddPictures.id = "files"
+    placePictures.appendChild(labelButton)
+    placePictures.appendChild(buttonAddPictures) 
 
-        // Appel de la photo 
-        buttonAddPictures.addEventListener("change", function(){
+    // Appel de la photo 
+    buttonAddPictures.addEventListener("change", function(){
+        const fr = new FileReader();
+        fr.readAsDataURL(buttonAddPictures.files[0]);
 
-            const fr = new FileReader();
-            fr.readAsDataURL(buttonAddPictures.files[0]);
+        fr.addEventListener("load", function (){
+            const url = fr.result
+            const img = new Image()
+            img.src = url
+            placePictures.innerHTML = ""
+            placePictures.appendChild(img)
+            titreInputForm.value = buttonAddPictures.files[0].name
+        }) 
+    })
 
-            fr.addEventListener("load", function (){
-                const url = fr.result
-                const img = new Image()
-                img.src = url
-                placePictures.innerHTML = ""
-                placePictures.appendChild(img)
-                titreInputForm.value = buttonAddPictures.files[0].name
-            }) 
-        })
+    const textPictures = document.createElement("p")
+    textPictures.innerText = ("jpg, png : 4mo max")
+    placePictures.appendChild(textPictures)
 
-        const textPictures = document.createElement("p")
-        textPictures.innerText = ("jpg, png : 4mo max")
-        placePictures.appendChild(textPictures)
+    /********************   Création du formulaire   ************************/
 
-     /********************   Création du formulaire   ************************/
+    const formAddPictures = document.createElement("form")
+    modale2.appendChild(formAddPictures)
 
-        const formAddPictures = document.createElement("form")
-        modale.appendChild(formAddPictures)
+    formAddPictures.appendChild(placePictures)
 
-        formAddPictures.appendChild(placePictures)
+    const labelTitre = document.createElement("label")
+    labelTitre.innerText = ("Titre")
+    formAddPictures.appendChild(labelTitre)
 
-        const labelTitre = document.createElement("label")
-        labelTitre.innerText = ("Titre")
-        formAddPictures.appendChild(labelTitre)
+    const titreInputForm = document.createElement("input")
+    titreInputForm.type = "text"
+    titreInputForm.name = "title"
+    formAddPictures.appendChild(titreInputForm)
 
-        const titreInputForm = document.createElement("input")
-        titreInputForm.type = "text"
-        titreInputForm.name = "title"
-        formAddPictures.appendChild(titreInputForm)
+    const labelCategorie = document.createElement("label")
+    labelCategorie.innerText = ("Catégorie")
+    formAddPictures.appendChild(labelCategorie)
 
-        const labelCategorie = document.createElement("label")
-        labelCategorie.innerText = ("Catégorie")
-        formAddPictures.appendChild(labelCategorie)
+    /********************   List of category of work  ************************/
 
-     /********************   List of category of work  ************************/
+    const categorieInputForm = document.createElement("select")
+    categorieInputForm.classList = ("Inputselect")
+    categorieInputForm.name = "category"
+    formAddPictures.appendChild(categorieInputForm)
 
-        const categorieInputForm = document.createElement("select")
-        categorieInputForm.classList = ("Inputselect")
-        categorieInputForm.name = "category"
-        formAddPictures.appendChild(categorieInputForm)
-
-        for ( let i = 0 ; i < jsonListCat.length ; i++) {
+    for ( let i = 0 ; i < jsonListCat.length ; i++) {
             const newCat = document.createElement("option")
             newCat.innerText = jsonListCat[i].name
             newCat.value = jsonListCat[i].id
             categorieInputForm.appendChild(newCat)
-        }
+    }
 
-        const border = document.createElement("p")
-        border.classList = ("border")
-        formAddPictures.appendChild(border)
-     /********************   Button Valid formulaire  ************************/
+    const border = document.createElement("p")
+    border.classList = ("border")
+    formAddPictures.appendChild(border)
+    /********************   Button Valid formulaire  ************************/
 
-        const buttonValidPicture = document.createElement("input")
-        buttonValidPicture.type = "submit"
-        buttonValidPicture.value = "Valider"
-        buttonValidPicture.classList =("buttonFiltres buttonAdd")
-        formAddPictures.appendChild(buttonValidPicture)
+    const buttonValidPicture = document.createElement("input")
+    buttonValidPicture.type = "submit"
+    buttonValidPicture.value = "Valider"
+    buttonValidPicture.classList =("buttonFiltres buttonAdd")
+    formAddPictures.appendChild(buttonValidPicture)
        
-        const champError = document.createElement("p")
-        champError.id = ("erreur")
-        formAddPictures.appendChild(champError)
+    const champError = document.createElement("p")
+    champError.id = ("erreur")
+    formAddPictures.appendChild(champError)
 
-        const champSucces = document.createElement("p")
-        champSucces.id = ("succes")
-        formAddPictures.appendChild(champSucces)
+    const champSucces = document.createElement("p")
+    champSucces.id = ("succes")
+    formAddPictures.appendChild(champSucces)
 
-        formAddPictures.addEventListener("submit", function(event){
-            event.preventDefault()
-            let erreur 
-            const inputs = this
-            const myFormData = new FormData()
-                myFormData.append("image", buttonAddPictures.files[0])
-                myFormData.append("title", titreInputForm.value)
-                myFormData.append("category", +categorieInputForm.value)
+    formAddPictures.addEventListener("submit", function(event){
+        event.preventDefault()
+        let erreur 
+        const inputs = this
+        const myFormData = new FormData()
+        myFormData.append("image", buttonAddPictures.files[0])
+        myFormData.append("title", titreInputForm.value)
+        myFormData.append("category", +categorieInputForm.value)
 
-                if (myFormData.get("image") == "undefined"){
+        if (myFormData.get("image") == "undefined"){
                     erreur = "Veuillez ajouter une image"
-                }
-                if (myFormData.get("title") === ""){
+        }
+        if (myFormData.get("title") === ""){
                     erreur = "Veuillez ajouter un titre"
-                } 
-                if (erreur) {
+        } 
+        if (erreur) {
                     event.preventDefault()
                     document.getElementById("erreur").innerHTML = erreur
-                } else {
-                    document.getElementById("erreur").style.color = "green"
-                    document.getElementById("erreur").innerHTML = "Formulaire envoyé"
-                    fetch("http://localhost:5678/api/works", {
-                        method : "POST",
-                        headers : {
-                            "Accept" : "application/json",
-                            Authorization :`Bearer ${token}`
-                        },
-                        body : myFormData    
-                    }).then(resp=> resp.json()).then(result => {   
-                        contenuGallery.innerHTML = ""
-                        fetch('http://localhost:5678/api/works')
-                        .then (dataWorks => dataWorks.json())
-                        .then (jsonListWorks => { 
-                            displayWorks(jsonListWorks)        
-                        });
-                    }) 
-                }
-        })
-        iconCross.addEventListener("click", function(){
-        modale.style.visibility = "hidden"
+        } else {     
+            document.getElementById("erreur").style.color = "green"
+            document.getElementById("erreur").innerHTML = "Formulaire envoyé"
+            fetch("http://localhost:5678/api/works", {
+                method : "POST",
+                headers : {
+                    "Accept" : "application/json",
+                    Authorization :`Bearer ${token}`
+                },
+                body : myFormData    
+            })
+            .then(resp=> resp.json()).then(result => {   
+                contenuGallery.innerHTML = ""
+                fetch('http://localhost:5678/api/works')
+                .then (dataWorks => dataWorks.json())
+                .then (jsonListWorks => { 
+                    console.log(result)
+                    displayWorks(jsonListWorks)
+                    console.log(jsonListWorks)
+                })
+            }) 
+        }
+    })
+    iconCross.addEventListener("click", function(){
+        modale2.style.visibility = "hidden"
+        if (modale.style.visibility = "hidden"){
+            modale.innerHTML = ""
+        }
+        if (modale2.style.visibility = "hidden"){
+                modale2.innerHTML = ""
+        }
         buttonModif.disabled = false
-        modale.innerHTML= ""
-        })
-    })  
+    })
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/************** fonctions localStroage ****************/
+/***************** fonction localStorage ******************/
 
 function displayLogin(){
     if (token != "undefined") {

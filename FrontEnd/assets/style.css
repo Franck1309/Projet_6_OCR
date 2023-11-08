@@ -180,7 +180,7 @@ li:hover {
 /*********************   Fin du Formulaire Login   ********************/
 
 /*********************   Modale 1 ********************/
-#modale {
+#modale , #modale2 {
 	display: block;
 	visibility: hidden;
 	position: absolute;
@@ -227,6 +227,21 @@ li:hover {
 	cursor: pointer;
 }
 
+#modale2 .buttonAddPictures , #modale2 .buttonAdd{
+	display: flex;
+	margin: auto;
+	margin-top: 30px;
+	border: #1D6154 1px solid;
+	border-radius: 60px;
+	padding: 5px;
+	padding-left: 10px;
+	padding-right: 10px;
+	background-color: #1D6154;
+	color: white;
+	font-family: syne;
+	cursor: pointer;
+}
+
 .backPoubelle {
 	display: block;
 	position: relative;
@@ -251,7 +266,7 @@ li:hover {
 	padding: 20px;
 }
 
-#modale h2 {
+#modale2 h2 {
 	color: black;
 	font-family: work sans;
 	font-weight: 300;
@@ -287,21 +302,21 @@ form .placePictures img {
 	font-size: xxx-large;
 }
 
-#modale .buttonAddPictures {
+#modale2 .buttonAddPictures {
 background-color: #CBD6DC;
 border: none;
 color: #306685;
 margin-top: 10px;
 }
 
-#modale .placePictures p {
+#modale2 .placePictures p {
 	color: #306685;
 	margin: auto;
 	margin-top: 5px;
 	padding-bottom: 10px;
 }
 
-#modale form {
+#modale2 form {
 	display: flex;
 	flex-direction: column;
 	width: 70%;
@@ -311,7 +326,7 @@ margin-top: 10px;
 	height: auto;
 }
 
-#modale form .border {
+#modale2 form .border {
 	padding-top: 30px;
 	border-bottom: #1D6154 solid 1px;
 }
@@ -321,7 +336,7 @@ form input {
 	justify-content: center;
 }
 
-#modale form .buttonAdd {
+#modale2 form .buttonAdd {
 	width: 60%;
 	justify-content: center;
 	color: #306685;

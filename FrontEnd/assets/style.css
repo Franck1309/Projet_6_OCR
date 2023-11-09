@@ -74,7 +74,6 @@ header {
 section {
 	margin: 50px 0
 }
-
 h1{
 	display: flex;
 	flex-direction: column;
@@ -83,20 +82,19 @@ h1{
 	font-weight: 800;
 	color: #B1663C
 }
-
 h1 > span {
 	font-family: 'Work Sans';
 	font-size:10px;
 	letter-spacing: 0.1em;
 ;
 }
-
 h2{
 	font-family: 'Syne';
 	font-weight: 700;
 	font-size: 30px;
 	color: #1D6154
 }
+/*************** Liens navigation ******************/
 nav ul {
 	display: flex;
 	align-items: center;
@@ -106,17 +104,92 @@ nav li {
 	padding: 0 10px;
 	font-size: 1.2em;
 }
-
 li:hover {
 	color: #B1663C;
 }
-
-/***************     Boutton Modifier      ******************/
-
-.filtres {
+/***************  Section Introduction Présentation   ******************/
+#introduction {
+	display: flex;
+	align-items: center;
+}
+#introduction figure {
+	flex: 1
+}
+#introduction img {
 	display: block;
+	margin: auto;
+	width: 80%;
+}
+#introduction article {
+	flex: 1
+}
+#introduction h2 {
+	margin-bottom: 1em;
+}
+#introduction p {
+	margin-bottom: 0.5em;
+}
+/*************** Titre Mes Projets ******************/
+.title {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+}
+#portfolio h2 {
+	text-align: center;
+	margin-bottom: 1em;
 }
 
+/*************** Bouton Modifier ******************/
+.title i {
+	margin-top: 9px;
+	padding-left: 15px ;
+}
+.title input {
+	border: none;
+	background-color: white;
+	height: 19px;
+	margin-top: 8px;
+	cursor: pointer;
+}
+/*************** Boutons Filtres Projets ******************/
+.filtres {
+	display: block;
+	text-align: center;
+}
+.filtres .buttonFiltres {
+	margin: 5px;
+	margin-bottom: 30px;
+	border: #1D6154 1px solid;
+	border-radius: 60px;
+	padding: 5px;
+	padding-left: 10px;
+	padding-right: 10px;
+	background-color: white;
+	color: #1D6154;
+	font-family: syne;
+	cursor: pointer;
+}
+.filtres .buttonFiltres:active {
+	background-color: #1D6154;
+	color: white;
+}
+.filtres .buttonFiltres:focus {
+	background-color: #1D6154;
+	color: white;
+}
+/***************   Gallery images Projets  ******************/
+.gallery {
+	width: 100%;
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	grid-column-gap: 20px;
+	grid-row-gap: 20px;
+}
+.gallery img {
+	width: 100%;
+	margin-bottom: 4px;
+}
 /***************     Formulaire Login   ******************/
 #login {
 	display: flex;
@@ -125,7 +198,6 @@ li:hover {
 	margin-top: 150px;
 	margin-bottom: 180px;
 }
-
 #login form {
 	display: flex;
 	flex-direction: column;
@@ -133,14 +205,9 @@ li:hover {
 	gap: 10px;
 	margin-top: 50px;
 }
-
 #login form .text {
 	display: flex;
 	align-items: start;
-}
-
-#login .redirection {
-	background-color: blue;
 }
 #login .btnConnecter {
 	border-radius: 60px;
@@ -164,7 +231,6 @@ li:hover {
 #login .btnConnecter:active {
 	background-color: #299d88;
 }
-
 #login form .saisie {
 	border: none;
 	background-color: white;
@@ -172,14 +238,10 @@ li:hover {
 	height: 51px;
 	width: 350px;
 }
-
 #login a {
 	text-align: center;
 } 
-
-/*********************   Fin du Formulaire Login   ********************/
-
-/*********************   Modale 1 ********************/
+/*********************   Modale 1 et Modale 2 ********************/
 #modale , #modale2 {
 	display: block;
 	visibility: hidden;
@@ -193,7 +255,41 @@ li:hover {
 	border-radius: 10px;
 	padding-bottom: 30px;
 }
-
+.buttonAdd{
+	display: flex;
+	margin: auto;
+	justify-content: center;
+	margin-top: 30px;
+	border: none;
+	border-radius: 60px;
+	padding: 5px;
+	padding-left: 10px;
+	padding-right: 10px;
+	background-color: #1D6154;
+	color: white;
+	font-family: syne;
+	cursor: pointer;
+	width: 237px;
+}
+.divIcon {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	padding: 20px;
+   }
+.divIconX {
+	display: flex;
+	flex-direction: row;
+	justify-content: end;
+	padding: 20px;
+}
+#modale2 h2 , #modale h2{
+	color: black;
+	font-family: work sans;
+	font-weight: 400;
+	font-size:x-large;
+}
+/*********************  Modale 1  ********************/
 #portfolio .contenuModale {
 	display: grid;
 	margin: auto;
@@ -205,43 +301,11 @@ li:hover {
 	justify-content: space-between;
 	border-bottom: #1D6154 1px solid ;
 }
-
 .contenuModale img {
 	display: flex;
 	position: relative;
 	width: 100%;
 }
-
-#modale .buttonAddPictures , #modale .buttonAdd{
-	display: flex;
-	margin: auto;
-	margin-top: 30px;
-	border: #1D6154 1px solid;
-	border-radius: 60px;
-	padding: 5px;
-	padding-left: 10px;
-	padding-right: 10px;
-	background-color: #1D6154;
-	color: white;
-	font-family: syne;
-	cursor: pointer;
-}
-
-#modale2 .buttonAddPictures , #modale2 .buttonAdd{
-	display: flex;
-	margin: auto;
-	margin-top: 30px;
-	border: #1D6154 1px solid;
-	border-radius: 60px;
-	padding: 5px;
-	padding-left: 10px;
-	padding-right: 10px;
-	background-color: #1D6154;
-	color: white;
-	font-family: syne;
-	cursor: pointer;
-}
-
 .backPoubelle {
 	display: block;
 	position: relative;
@@ -252,36 +316,31 @@ li:hover {
 	background-color: black;
 	border-radius: 10%;
 }
-
 #modale .backPoubelle i {
 	color: white;
 	padding: 4px;
 	margin-top: 3px;
 }
-
-.divIconX {
-	display: flex;
-	flex-direction: row;
-	justify-content: end;
-	padding: 20px;
-}
-
-#modale2 h2 {
-	color: black;
-	font-family: work sans;
-	font-weight: 300;
-}
-
-/*********************  Fin Modale 1  ********************/
-
 /*********************   Modale 2 ********************/
-.divIcon {
- display: flex;
- flex-direction: row;
- justify-content: space-between;
- padding: 20px;
+.buttonLabel{
+	display: flex;
+	margin: auto;
+	margin-top: 30px;
+	border: none;
+	border-radius: 60px;
+	padding: 5px;
+	padding-left: 10px;
+	padding-right: 10px;
+	background-color: #CBD6DC;
+	color: #306685;
+	font-family: syne;
+	cursor: pointer;
 }
-
+.inputText {
+	padding: 10px;
+	border: none;
+	box-shadow: 1px 1px 10px 1px rgb(232, 224, 224) ;
+}
 .placePictures {
 	display: flex;
 	flex-direction: column;
@@ -295,27 +354,23 @@ form .placePictures img {
 	object-fit: cover;
 	height: 169px;
 }
-
 .placePictures i {
 	margin: auto;
 	padding-top: 10px;
 	font-size: xxx-large;
 }
-
 #modale2 .buttonAddPictures {
 background-color: #CBD6DC;
 border: none;
 color: #306685;
 margin-top: 10px;
 }
-
 #modale2 .placePictures p {
 	color: #306685;
 	margin: auto;
 	margin-top: 5px;
 	padding-bottom: 10px;
 }
-
 #modale2 form {
 	display: flex;
 	flex-direction: column;
@@ -325,111 +380,14 @@ margin-top: 10px;
 	margin: auto;
 	height: auto;
 }
-
 #modale2 form .border {
 	padding-top: 30px;
 	border-bottom: #1D6154 solid 1px;
 }
-
 form input {
 	margin-bottom: 10px;
-	justify-content: center;
 }
-
-#modale2 form .buttonAdd {
-	width: 60%;
-	justify-content: center;
-	color: #306685;
-	background-color: #CBD6DC;
-	border: none;
-}
-
-/*********************  Fin Modale  ********************/
-#introduction {
-	display: flex;
-	align-items: center;
-}
-#introduction figure {
-	flex: 1
-}
-#introduction img {
-	display: block;
-	margin: auto;
-	width: 80%;
-}
-
-#introduction article {
-	flex: 1
-}
-#introduction h2 {
-	margin-bottom: 1em;
-}
-
-#introduction p {
-	margin-bottom: 0.5em;
-}
-#portfolio h2 {
-	text-align: center;
-	margin-bottom: 1em;
-}
-
-.title {
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
-	
-}
-.title i {
-	margin-top: 9px;
-	padding-left: 15px ;
-}
-.title input {
-	border: none;
-	background-color: white;
-	height: 19px;
-	margin-top: 8px;
-	cursor: pointer;
-}
-
-.filtres {
-	text-align: center;
-}
-
-.filtres .buttonFiltres {
-	margin: 5px;
-	margin-bottom: 30px;
-	border: #1D6154 1px solid;
-	border-radius: 60px;
-	padding: 5px;
-	padding-left: 10px;
-	padding-right: 10px;
-	background-color: white;
-	color: #1D6154;
-	font-family: syne;
-	cursor: pointer;
-}
-.filtres .buttonFiltres:active {
-	background-color: #1D6154;
-	color: white;
-}
-.filtres .buttonFiltres:focus {
-	background-color: #1D6154;
-	color: white;
-}
-
-
-.gallery {
-	width: 100%;
-	display: grid;
-	grid-template-columns: 1fr 1fr 1fr;
-	grid-column-gap: 20px;
-	grid-row-gap: 20px;
-}
-
-.gallery img {
-	width: 100%;
-	margin-bottom: 4px;
-}
+/***************  Section Formulaire de Contact   ******************/
 #contact {
 	width: 50%;
 	margin: auto;
@@ -447,7 +405,6 @@ form input {
 	display: flex;
 	flex-direction: column;
 }
-
 #contact input {
 	height: 50px;
 	font-size: 1.2em;
@@ -460,17 +417,6 @@ form input {
 #contact textarea {
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
-}
-
-input[type="submit"]{
-	font-family: 'Syne';
-	font-weight: 700;
-	color: white;
-	background-color: #1D6154;
-	margin : 2em auto ;
-	width: 180px;
-	text-align: center;
-	border-radius: 60px ;
 }
 /*******************   Footer   **********************/
 footer nav ul {
